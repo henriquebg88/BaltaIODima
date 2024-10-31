@@ -1,14 +1,14 @@
 <h1>Dima - BaltaIO Blazor</h1>
-<h4>Dima.sln</h4>
+<h2>Dima.sln</h2>
 Solução agrupadora de projetos
 
-<h4>Dima.Core</h4>
+<h2>Dima.Core</h2>
 Projeto compartilhado entrs os projetos da solution
 Não deixar informação sensível pois será compartilhado com o projeto dr Frontend, além do Backend
 [dotnet new classlib -o Dima.Core]
 [dotnet sln add ./Dima.Core]
 
-<h5>Anotações</h5>
+<h4>Anotações</h4>
 <ul>
   <li>
     Os projetos de Frontend, Blazor WASM, que roda no lado do Cliente e de Backend, a API, que roda no Servidor, ambos vão referenciar a Class Library (Dima.Core). 
