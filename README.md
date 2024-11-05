@@ -3,10 +3,21 @@
 Solução agrupadora de projetos
 
 <h2>Dima.Core</h2>
-Projeto compartilhado entrs os projetos da solution
+
+Projeto compartilhado entre os projetos da solution
 Não deixar informação sensível pois será compartilhado com o projeto dr Frontend, além do Backend
-[dotnet new classlib -o Dima.Core]
+
+[dotnet new classlib -o Dima.Core]<br>
 [dotnet sln add ./Dima.Core]
+
+<h2>Dima.API</h2>
+
+API
+
+[dotnet new web -o Dima.API]<br>
+[dotnet sln add ./Dima.API]
+
+<hr>
 
 <h4>Anotações</h4>
 <ul>
