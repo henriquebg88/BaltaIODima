@@ -1,6 +1,14 @@
 //Minimal API
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen( SW => {
+    //Para evitar que o Swagger considere iguais e agrupe as classes com mesmo nome, mas de namespaces difentes.
+    SW.CustomSchemaIds( n => n.FullName );
+});
+
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 #region Anotações
 //Requisição (REQUEST) -> Cabeçalho e Corpo | Request => Header e Body
@@ -37,7 +45,12 @@ var app = builder.Build();
 
 // app.MapPost("/produtos", (Produto produto) => new { message: "ok"}); Utilizando o objeto anônimo, será retornado um JSON
 // Este JSON não será reconhecido pelo Swagger para documentar a API.
-//// app.MapPost("/produtos", (Produto produto) => new Response { message: "ok"}); Será utlizado pelo Swagger
+// app.MapPost("/produtos", (Produto produto) => new Response { message: "ok"}); Será utlizado pelo Swagger
+// app.MapPost("/produtos", (Produto produto) => new Response { message: "ok"})
+//                                                              .WithName("Produtos: Create")
+//                                                              .WithSummary("Cria um novo produto")
+//                                                              .Produces<Response>(); (classe Response, ou qualquer outra)
+// estes métodos no final são para melhorar a documentação da API no Swagger
 #endregion
 
 app.MapGet("/", () => "Hello World!");
