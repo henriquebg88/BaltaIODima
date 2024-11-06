@@ -7,18 +7,23 @@ Solução agrupadora de projetos
 Projeto compartilhado entre os projetos da solution
 Não deixar informação sensível pois será compartilhado com o projeto dr Frontend, além do Backend
 
-<code>dotnet new classlib -o Dima.Core</code><br>
+Criar a Biblioteca:<br>
+<code>dotnet new classlib -o Dima.Core</code>
+
+Colocar na solução<br>
 <code>dotnet sln add ./Dima.Core</code>
 
 <h2>Dima.API</h2>
 
-API
+Criar a API:<br>
+<code>dotnet new web -o Dima.API</code>
 
-<code>dotnet new web -o Dima.API</code><br>
+Colocar na solução:<br>
 <code>dotnet sln add ./Dima.API</code>
 
 Pacote para criar a documentação da API:<br>
-<code>dotnet add package Microsoft.AspNetCore.OpenApi</code>
+<code>dotnet add package Microsoft.AspNetCore.OpenApi</code><br>
+<code>gotnet add package Sawshbuckle.AspNetCore</code>
 
 <hr>
 
