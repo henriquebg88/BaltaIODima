@@ -23,7 +23,9 @@ Colocar na solução:<br>
 
 Pacote para criar a documentação da API:<br>
 <code>dotnet add package Microsoft.AspNetCore.OpenApi</code><br>
-<code>gotnet add package Sawshbuckle.AspNetCore</code>
+<code>dotnet add package Swashbuckle.AspNetCore</code>
+
+<code>dotnet run</code> ou botão de Run
 
 <hr>
 
