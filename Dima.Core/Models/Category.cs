@@ -1,6 +1,6 @@
 namespace Dima.Core.Models
 {
-    class Category
+    public class Category
     {
         public long id { get; set; }
         public string title { get; set; } = string.Empty;

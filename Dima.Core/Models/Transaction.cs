@@ -2,7 +2,7 @@ using Dima.Core.Enums;
 
 namespace Dima.Core.Models
 {
-    class Transaction
+    public class Transaction
     {
         public long id { get; set; }
         public string title { get; set; } = string.Empty;
