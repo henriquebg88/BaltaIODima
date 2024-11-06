@@ -27,6 +27,9 @@ Pacote para criar a documentação da API:<br>
 
 <code>dotnet run</code> ou botão de Run
 
+Api rodando (por padrão) em <code>http://localhost:5139</code><br>
+Swagger: <code>http://localhost:5139/swagger</code>
+
 <hr>
 
 <h4>Anotações</h4>
