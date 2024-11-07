@@ -30,6 +30,17 @@ Pacote para criar a documentação da API:<br>
 Api rodando (por padrão) em <code>http://localhost:5139</code><br>
 Swagger: <code>http://localhost:5139/swagger</code>
 
+API -> Banco (Code First)
+<ol>
+  <li>Instalar o EntityFramework para o banco que será usado</li>
+  <li>Instalar o Designer do EntityFramework</li>
+  <li>Criar as Models</li>
+  <li>Criar o contexto do banco de dados, herdando a interface DBContext do Entity</li>
+  <li>Fazer o mapeamento das classes, dentro do contexto criado</li>
+  <li>No Program.cs acrescentar o uso do DbContext e passar a connection string</li>
+  <li>Antes, é preciso ter o SQL Server instalado. Pode ser feito usando o Docker, para não instalar localmente, e usar imagens prontas: https://blog.balta.io/docker-instalacao-configuracao-e-primeiros-passos/</li>
+</ol>
+
 <hr>
 
 <h4>Anotações</h4>
