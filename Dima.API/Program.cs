@@ -1,5 +1,15 @@
 //Minimal API
+using Dima.API.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("Default") ?? "";
+
+builder.Services.AddDbContext<AppDbContext>( x => {
+    x.UseSqlServer(connectionString);
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen( SW => {
     //Para evitar que o Swagger considere iguais e agrupe as classes com mesmo nome, mas de namespaces difentes.

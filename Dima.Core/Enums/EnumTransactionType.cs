@@ -2,7 +2,7 @@ namespace Dima.Core.Enums
 {
     enum EnumTransactionType
     {
-        Deposit,
-        Withdraw
+        Deposit = 1,
+        Withdraw = 2
     }
 }
