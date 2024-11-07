@@ -39,6 +39,7 @@ API -> Banco (Code First)
   <li>Fazer o mapeamento das classes, dentro do contexto criado</li>
   <li>No Program.cs acrescentar o uso do DbContext e passar a connection string</li>
   <li>Antes, é preciso ter o SQL Server instalado. Pode ser feito usando o Docker, para não instalar localmente, e usar imagens prontas: https://blog.balta.io/docker-instalacao-configuracao-e-primeiros-passos/</li>
+  <li>Imagem do SQL Server: https://balta.io/blog/sql-server-docker</li>
 </ol>
 
 <hr>
