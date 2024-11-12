@@ -1,5 +1,6 @@
 //Minimal API
 using Dima.API.Data;
+using Dima.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,32 @@ builder.Services.AddSwaggerGen( SW => {
     //Para evitar que o Swagger considere iguais e agrupe as classes com mesmo nome, mas de namespaces difentes.
     SW.CustomSchemaIds( n => n.FullName );
 });
+
+#region Explicação AddTransient/Singleton/Scoped
+    /**
+    AddTransient<Handler>():
+        Isso registra o tipo Handler no contêiner de injeção de dependência com o tempo de vida transitório. 
+        Ou seja, toda vez que o ASP.NET Core precisar de uma instância do tipo Handler, ele criará uma nova instância dessa classe.
+        A instância de Handler será criada e destruída a cada vez que for solicitada. 
+        Por exemplo, se o Handler for injetado em uma requisição HTTP, uma nova instância será criada para cada requisição.
+        -Fluxo de vida:
+            Se você pedir o serviço duas vezes (em momentos diferentes ou no mesmo contexto), o ASP.NET Core criará duas instâncias distintas do serviço.
+
+    AddSingleton<Handler>(): 
+        A instância do serviço é criada uma única vez e compartilhada em toda a vida da aplicação.
+
+    AddScoped<Handler>(): 
+        A instância do serviço é criada uma vez por requisição (escopo de requisição). 
+        Ou seja, a mesma instância é reutilizada durante o processamento de uma única requisição HTTP, mas uma nova instância será criada para cada nova requisição.
+        -Fluxo de vida:
+            Se você pedir o serviço dentro do mesmo contexto de requisição (por exemplo, dentro do mesmo controlador ou serviço), o ASP.NET Core vai retornar a mesma instância do serviço.
+            Se a requisição acabar (por exemplo, a resposta HTTP for enviada ao cliente), a instância do serviço será descartada.
+    **/
+#endregion
+
+//Registrar um tipo de serviço (no caso, o handler) no container de dependências (para injeção de dependência), 
+//com tempo de vida transitório (Ou seja, toda vez que o ASP.NET Core precisar de uma instância do tipo Handler, ele criará uma nova instância dessa classe.)
+builder.Services.AddTransient<Handler>(); // O Aspnet consegue inferir que o Request vem do Body, mas não sabe de onde vem o Handler
 
 var app = builder.Build();
 app.UseSwagger();
@@ -63,9 +90,43 @@ app.UseSwaggerUI();
 // estes métodos no final são para melhorar a documentação da API no Swagger
 #endregion
 
-app.MapGet("/", () => "Hello World!");
-app.MapPost("/", () => "Hello World!");
-app.MapPut("/", () => "Hello World!");
-app.MapDelete("/", () => "Hello World!");
+app.MapPost(
+        "/v1/Categories", 
+        (Request request, Handler handler) => handler.Handle(request)
+    ).WithName("Categories: Create")
+     .WithSummary("Cria uma nova Categoria")
+     .Produces<Category>();
+
 
 app.Run();
+
+public class Request
+{
+    public string title { get; set; } = null!;
+    public string description { get; set; } = null!;
+}
+
+public class Response
+{
+    public long id { get; set;}
+    public string title { get; set;}  = null!;
+}
+
+public class Handler(AppDbContext context)
+{
+    public Response Handle(Request request)
+    {
+        var category = new Category{
+            title = request.title,
+            description = request.description,
+        };
+
+        context.Categorias.Add(category);
+        context.SaveChanges();
+
+        return new Response{
+            id = category.id,
+            title = category.title,
+        };
+    }
+}

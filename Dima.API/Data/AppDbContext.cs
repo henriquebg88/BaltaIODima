@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dima.API.Data
 {
-    class AppDbContext : DbContext
+    public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) :base(options)
         {
