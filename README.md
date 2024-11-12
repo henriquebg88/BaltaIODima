@@ -1,4 +1,5 @@
 <h1>Dima - BaltaIO Blazor</h1>
+
 <h2>Dima.sln</h2>
 Solução agrupadora de projetos
 
@@ -46,6 +47,7 @@ API -> Banco (Code First)
 
 <h4>Anotações</h4>
 <ul>
+  <li>Código fonte Balta IO: https://github.com/balta-io/3054</li>
   <li>
     Os projetos de Frontend, Blazor WASM, que roda no lado do Cliente e de Backend, a API, que roda no Servidor, ambos vão referenciar a Class Library (Dima.Core). 
     Se for referenciado algo como Entity Framework na Biblioteca Compartilhada, o Entity será referenciado em ambos os projetos. Ou seja, no projeto de Frontend também.
