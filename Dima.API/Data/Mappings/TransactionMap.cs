@@ -34,8 +34,8 @@ namespace Dima.API.Data.Mappings
             
             builder.Property(x => x.categoryId)
                 .IsRequired()
-                .HasColumnType(DBTypes.NVARCHAR)
-                .HasMaxLength(160);
+                .HasColumnType(DBTypes.BIGINT);
+                
 
             builder.Property(x => x.userId)
                 .IsRequired()

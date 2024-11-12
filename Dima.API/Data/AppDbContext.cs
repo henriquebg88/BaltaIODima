@@ -12,6 +12,10 @@ namespace Dima.API.Data
 {
     class AppDbContext : DbContext
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options) :base(options)
+        {
+            
+        }
         public DbSet<Category> Categorias { get; set; } = null!;
         public DbSet<Transaction> Transacoes { get; set; } = null!;
 
