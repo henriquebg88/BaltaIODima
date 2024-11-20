@@ -9,7 +9,7 @@ namespace Dima.Core.Handlers
     public interface ICaterogyHandler // Multiplas implementações. Servirá para o frontend e backend
     {
         Task<Response<Category?>> GetByIdAsync(GetCategoryByIdRequest request);
-        Task<Response<List<Category>>> GetAllAsync(GetAllCategoriesRequest request);
+        Task<PagedResponse<List<Category>>> GetAllAsync(GetAllCategoriesRequest request);
         Task<Response<Category?>> CreateAsync(CreateCategoryRequest request);
         Task<Response<Category?>> UpdateAsync(UpdateCategoryRequest request);
         Task<Response<Category?>> DeleteteAsync(DeleteCategoryRequest request);

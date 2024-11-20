@@ -1,0 +1,39 @@
+using Dima.API.Commom.API;
+using Dima.Core;
+using Dima.Core.Handlers;
+using Dima.Core.Models;
+using Dima.Core.Requests.Categories;
+using Dima.Core.Responses;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Dima.API.Endpoints.Categories
+{
+    public class GetAllCategoryEndpoint : IEndpoint
+    {
+        public static void Map(IEndpointRouteBuilder app) 
+            => app.MapGet("", HandleAsyhnc)
+                    .WithName("Categories: GetAllByUser")
+                    .WithSummary("Retorna uma list de Categorias existentes de um usuário.")
+                    .WithOrder(5)
+                    .Produces<PagedResponse<List<Category>?>>();
+        
+        private static async Task<IResult> HandleAsyhnc(
+            ICaterogyHandler handler, 
+            [FromQuery]int pageNumber = Configurations.DefaultPageNumber, 
+            [FromQuery]int pageSize = Configurations.DefaultPageSize)
+        {
+            var request = new GetAllCategoriesRequest
+            {
+                userId = "",
+                pageNumber = pageNumber,
+                pageSize = pageSize
+            };
+
+            var result = await handler.GetAllAsync(request);
+
+            return result.isSuccess
+                ? TypedResults.Ok(result.data)
+                : TypedResults.BadRequest(result.data);
+        }
+    }
+}

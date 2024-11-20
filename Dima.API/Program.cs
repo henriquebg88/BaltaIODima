@@ -1,5 +1,6 @@
 //Minimal API
 using Dima.API.Data;
+using Dima.API.Endpoints;
 using Dima.API.Handlers;
 using Dima.Core.Handlers;
 using Dima.Core.Models;
@@ -95,12 +96,36 @@ app.UseSwaggerUI();
 // estes métodos no final são para melhorar a documentação da API no Swagger
 #endregion
 
-app.MapPost(
-        "/v1/Categories", 
-        async (CreateCategoryRequest request, ICaterogyHandler handler) => await handler.CreateAsync(request)
-    ).WithName("Categories: Create")
-     .WithSummary("Cria uma nova Categoria.")
+app.MapGet("/", () => new {message = "Estou vivo."});
+
+app.MapGet(
+        "/v1/Categories{id}", 
+        async (long id, ICaterogyHandler handler) => 
+        {
+            var request = new GetCategoryByIdRequest
+            {
+                id = id,
+                userId = ""
+            };
+            return await handler.GetByIdAsync(request);
+        }
+    ).WithName("Categories: Get")
+     .WithSummary("Retorna uma Categoria existente.")
      .Produces<Response<Category?>>();
+
+app.MapGet(
+        "/v1/Categories", 
+        async (ICaterogyHandler handler) => 
+        {
+            var request = new GetAllCategoriesRequest
+            {
+                userId = "HenriqueBG"
+            };
+            return await handler.GetAllAsync(request);
+        }
+    ).WithName("Categories: GetAllByUser")
+     .WithSummary("Retorna uma list de Categorias existentes de um usuário.")
+     .Produces<Response<List<Category>?>>();
 
 app.MapPut(
         "/v1/Categories{id}", 
@@ -119,7 +144,8 @@ app.MapDelete(
         {
             var request = new DeleteCategoryRequest
             {
-                id = id
+                id = id,
+                userId = ""
             };
             return await handler.DeleteteAsync(request);
         }
@@ -127,5 +153,7 @@ app.MapDelete(
      .WithSummary("Exclui uma nova Categoria existente.")
      .Produces<Response<Category?>>();
 
+//Método de extensão criado para colocar os mapeamentos
+app.MapEndpoints();
 
 app.Run();

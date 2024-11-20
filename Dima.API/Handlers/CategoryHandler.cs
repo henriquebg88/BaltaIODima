@@ -68,16 +68,49 @@ namespace Dima.API.Handlers
                 return new Response<Category?>(null, 500, "Não foi possível excluir a Categoria.");
             }
         }
-
-        public Task<Response<List<Category>>> GetAllAsync(GetAllCategoriesRequest request)
+        public async Task<Response<Category?>> GetByIdAsync(GetCategoryByIdRequest request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var category = await context.Categorias
+                                .AsNoTracking()
+                                .FirstOrDefaultAsync(c => c.id == request.id && c.userID == request.userId);
+
+                return category is null
+                    ? new Response<Category?>(null, 404, "Categoria não encontrada")
+                    : new Response<Category?>(category);
+                
+            }
+            catch (System.Exception)
+            {
+                return new Response<Category?>(null, 500, "Ocorreu um erro ao tentar retornar a Categoria");
+            }
+        }
+        public async Task<PagedResponse<List<Category>>> GetAllAsync(GetAllCategoriesRequest request)
+        {
+            try
+            {
+                var _query = context.Categorias
+                                .AsNoTracking()
+                                .Where(c => c.userID == request.userId);
+                
+                var categories = await _query
+                                .Skip((request.pageNumber -1) * request.pageSize)
+                                .Take(request.pageSize)
+                                .ToListAsync();
+
+                var count = await _query.CountAsync();
+
+                return new PagedResponse<List<Category>>(categories, count, request.pageNumber, request.pageSize);
+                
+            }
+            catch (System.Exception)
+            {
+                return new PagedResponse<List<Category>>(null, 500, "Ocorreu um erro ao tentar retornar a Categoria");
+            }
         }
 
-        public Task<Response<Category?>> GetByIdAsync(GetCategoryByIdRequest request)
-        {
-            throw new NotImplementedException();
-        }
+
 
     }
 }
