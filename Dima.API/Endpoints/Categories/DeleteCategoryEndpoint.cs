@@ -20,14 +20,14 @@ namespace Dima.API.Endpoints.Categories
             var request = new DeleteCategoryRequest
             {
                 id = id,
-                userId = ""
+                UserId = "henrique"
             };
 
             var result = await handler.DeleteteAsync(request);
 
             return result.isSuccess
-                ? TypedResults.Ok(result.data)
-                : TypedResults.BadRequest(result.data);
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
         }
     }
 }

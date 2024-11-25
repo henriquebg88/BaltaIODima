@@ -98,61 +98,6 @@ app.UseSwaggerUI();
 
 app.MapGet("/", () => new {message = "Estou vivo."});
 
-app.MapGet(
-        "/v1/Categories{id}", 
-        async (long id, ICaterogyHandler handler) => 
-        {
-            var request = new GetCategoryByIdRequest
-            {
-                id = id,
-                userId = ""
-            };
-            return await handler.GetByIdAsync(request);
-        }
-    ).WithName("Categories: Get")
-     .WithSummary("Retorna uma Categoria existente.")
-     .Produces<Response<Category?>>();
-
-app.MapGet(
-        "/v1/Categories", 
-        async (ICaterogyHandler handler) => 
-        {
-            var request = new GetAllCategoriesRequest
-            {
-                userId = "HenriqueBG"
-            };
-            return await handler.GetAllAsync(request);
-        }
-    ).WithName("Categories: GetAllByUser")
-     .WithSummary("Retorna uma list de Categorias existentes de um usuário.")
-     .Produces<Response<List<Category>?>>();
-
-app.MapPut(
-        "/v1/Categories{id}", 
-        async (long id, UpdateCategoryRequest request, ICaterogyHandler handler) => 
-        {
-            request.id = id;
-            return await handler.UpdateAsync(request);
-        } 
-    ).WithName("Categories: Update")
-     .WithSummary("Atualiza uma Categoria existente.")
-     .Produces<Response<Category?>>();
-
-app.MapDelete(
-        "/v1/Categories{id}", 
-        async (long id, ICaterogyHandler handler) => 
-        {
-            var request = new DeleteCategoryRequest
-            {
-                id = id,
-                userId = ""
-            };
-            return await handler.DeleteteAsync(request);
-        }
-    ).WithName("Categories: Delete")
-     .WithSummary("Exclui uma nova Categoria existente.")
-     .Produces<Response<Category?>>();
-
 //Método de extensão criado para colocar os mapeamentos
 app.MapEndpoints();
 

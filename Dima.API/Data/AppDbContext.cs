@@ -17,7 +17,7 @@ namespace Dima.API.Data
             
         }
         public DbSet<Category> Categorias { get; set; } = null!;
-        public DbSet<Transaction> Transacoes { get; set; } = null!;
+        public DbSet<Transaction> Transactions { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -18,11 +18,12 @@ namespace Dima.API.Endpoints.Categories
         
         private static async Task<IResult> HandleAsyhnc(ICaterogyHandler handler, CreateCategoryRequest request)
         {
+            request.UserId = "henrique";
             var result = await handler.CreateAsync(request);
 
             return result.isSuccess
-                ? TypedResults.Created($"/{result.data?.id}", result.data)
-                : TypedResults.BadRequest(result.data);
+                ? TypedResults.Created($"/{result.data?.id}", result)
+                : TypedResults.BadRequest(result);
         }
     }
 }

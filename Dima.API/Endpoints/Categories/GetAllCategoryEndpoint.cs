@@ -24,7 +24,7 @@ namespace Dima.API.Endpoints.Categories
         {
             var request = new GetAllCategoriesRequest
             {
-                userId = "",
+                UserId = "henrique",
                 pageNumber = pageNumber,
                 pageSize = pageSize
             };
@@ -32,8 +32,8 @@ namespace Dima.API.Endpoints.Categories
             var result = await handler.GetAllAsync(request);
 
             return result.isSuccess
-                ? TypedResults.Ok(result.data)
-                : TypedResults.BadRequest(result.data);
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
         }
     }
 }

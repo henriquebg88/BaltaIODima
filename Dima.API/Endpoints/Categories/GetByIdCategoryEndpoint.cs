@@ -9,7 +9,7 @@ namespace Dima.API.Endpoints.Categories
     public class GetByIdCategoryEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app) 
-            => app.MapDelete("{id}", HandleAsyhnc)
+            => app.MapGet("{id}", HandleAsyhnc)
                     .WithName("Categories: Get")
                     .WithSummary("Retorna uma Categoria existente.")
                     .WithOrder(4)
@@ -20,14 +20,14 @@ namespace Dima.API.Endpoints.Categories
             var request = new GetCategoryByIdRequest
             {
                 id = id,
-                userId = ""
+                UserId = "henrique"
             };
 
             var result = await handler.GetByIdAsync(request);
 
             return result.isSuccess
-                ? TypedResults.Ok(result.data)
-                : TypedResults.BadRequest(result.data);
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
         }
     }
 }

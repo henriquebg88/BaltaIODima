@@ -18,14 +18,14 @@ namespace Dima.API.Endpoints.Categories
         
         private static async Task<IResult> HandleAsyhnc(ICaterogyHandler handler, UpdateCategoryRequest request, long id)
         {
-            request.userId = "";
+            request.UserId = "henrique";
             request.id = id;
 
             var result = await handler.UpdateAsync(request);
 
             return result.isSuccess
-                ? TypedResults.Ok(result.data)
-                : TypedResults.BadRequest(result.data);
+                ? TypedResults.Ok(result)
+                : TypedResults.BadRequest(result);
         }
     }
 }

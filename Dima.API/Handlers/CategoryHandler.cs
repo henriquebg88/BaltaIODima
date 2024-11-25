@@ -14,7 +14,7 @@ namespace Dima.API.Handlers
             try
             {
                 var category = new Category{
-                    userID = request.userId,
+                    userID = request.UserId,
                     title = request.title,
                     description = request.description
                 };
@@ -35,7 +35,7 @@ namespace Dima.API.Handlers
         {
             try
             {
-                var category = await context.Categorias.FirstOrDefaultAsync(c => c.id == request.id && c.userID == request.userId);
+                var category = await context.Categorias.FirstOrDefaultAsync(c => c.id == request.id && c.userID == request.UserId);
                 if (category == null) return new Response<Category?>(null, 404, "Categoria não encontrada.");
 
                 category.title = request.title;
@@ -55,7 +55,7 @@ namespace Dima.API.Handlers
         {
             try
             {
-                var category = await context.Categorias.FirstOrDefaultAsync(c => c.id == request.id && c.userID == request.userId);
+                var category = await context.Categorias.FirstOrDefaultAsync(c => c.id == request.id && c.userID == request.UserId);
                 if (category == null) return new Response<Category?>(null, 404, "Categoria não encontrada.");
 
                 context.Categorias.Remove(category);
@@ -74,7 +74,7 @@ namespace Dima.API.Handlers
             {
                 var category = await context.Categorias
                                 .AsNoTracking()
-                                .FirstOrDefaultAsync(c => c.id == request.id && c.userID == request.userId);
+                                .FirstOrDefaultAsync(c => c.id == request.id && c.userID == request.UserId);
 
                 return category is null
                     ? new Response<Category?>(null, 404, "Categoria não encontrada")
@@ -92,7 +92,7 @@ namespace Dima.API.Handlers
             {
                 var _query = context.Categorias
                                 .AsNoTracking()
-                                .Where(c => c.userID == request.userId);
+                                .Where(c => c.userID == request.UserId);
                 
                 var categories = await _query
                                 .Skip((request.pageNumber -1) * request.pageSize)

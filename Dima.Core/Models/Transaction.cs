@@ -4,20 +4,20 @@ namespace Dima.Core.Models
 {
     public class Transaction
     {
-        public long id { get; set; }
-        public string title { get; set; } = string.Empty;
+        public long Id { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         
-        public DateTime createdAt { get; set; } = DateTime.Now;
-        public DateTime? paidOrReceivedAt { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? PaidOrReceivedAt { get; set; }
 
-        public EnumTransactionType  type { get; set; }
+        public EnumTransactionType  Type { get; set; } = EnumTransactionType.Withdraw;
 
 
-        public decimal amount { get; set; }
+        public decimal Amount { get; set; }
 
-        public long categoryId { get; set; }
-        public string userId { get; set; } = string.Empty;
-        public required Category Category { get; set; }
+        public long CategoryId { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public Category Category { get; set; } = null!;
     }
 }
