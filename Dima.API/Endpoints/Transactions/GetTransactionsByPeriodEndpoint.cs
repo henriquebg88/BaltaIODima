@@ -2,34 +2,38 @@ using Dima.API.Commom.API;
 using Dima.Core;
 using Dima.Core.Handlers;
 using Dima.Core.Models;
-using Dima.Core.Requests.Categories;
+using Dima.Core.Requests.Transactions;
 using Dima.Core.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dima.API.Endpoints.Categories
 {
-    public class GetAllCategoryEndpoint : IEndpoint
+    public class GetTransactionsByPeriodEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app) 
             => app.MapGet("", HandleAsyhnc)
-                    .WithName("Categories: GetAllByUser")
-                    .WithSummary("Retorna uma lista de Categorias existentes de um usuário.")
+                    .WithName("Categories: GetByPeriodUser")
+                    .WithSummary("Retorna uma lista de Transações existentes de um usuário, por um período. Caso período não seja especificado, trás do mês atual.")
                     .WithOrder(5)
-                    .Produces<PagedResponse<List<Category>?>>();
+                    .Produces<PagedResponse<List<Transaction>?>>();
         
         private static async Task<IResult> HandleAsyhnc(
-            ICaterogyHandler handler, 
+            ITransactionHandler handler, 
+            [FromQuery]DateTime? startDate = null,
+            [FromQuery]DateTime? endDate = null,            
             [FromQuery]int pageNumber = Configurations.DefaultPageNumber, 
             [FromQuery]int pageSize = Configurations.DefaultPageSize)
         {
-            var request = new GetAllCategoriesRequest
+            var request = new GetTransactionsByPeriodRequest
             {
                 UserId = "henrique",
                 pageNumber = pageNumber,
-                pageSize = pageSize
+                pageSize = pageSize,
+                StartDate = startDate,
+                EndDate = endDate
             };
 
-            var result = await handler.GetAllAsync(request);
+            var result = await handler.GetListByPeriodAsync(request);
 
             return result.isSuccess
                 ? TypedResults.Ok(result)

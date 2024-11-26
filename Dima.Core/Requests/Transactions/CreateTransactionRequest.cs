@@ -10,10 +10,6 @@ namespace Dima.Core.Requests.Transactions
         public string Title { get; set; } = null!;
 
         
-        [Required(ErrorMessage = "Tipo inválido")]
-        public EnumTransactionType MyProperty { get; set; }
-
-        
         [Required(ErrorMessage = "Valor inválido")]
         public Decimal Amount { get; set; }
 

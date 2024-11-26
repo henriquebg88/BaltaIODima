@@ -8,6 +8,7 @@ namespace Dima.API.Endpoints
         //Extension Method (Método de Extensão)
         private const string V1 = "v1";
         private const string CATEGORIES = "categories";
+        private const string TRANSACTIONS = "transactions";
 
         public static void MapEndpoints(this WebApplication app)
         {
@@ -21,6 +22,15 @@ namespace Dima.API.Endpoints
                        .MapEndpoint<DeleteCategoryEndpoint>()
                        .MapEndpoint<GetByIdCategoryEndpoint>()
                        .MapEndpoint<GetAllCategoryEndpoint>();
+
+            endpointsV1.MapGroup(TRANSACTIONS)
+                       .WithTags(TRANSACTIONS)
+                       //.RequireAuthorization()
+                       .MapEndpoint<CreateTransactionEndpoint>()
+                       .MapEndpoint<UpdateTransactionEndpoint>()
+                       .MapEndpoint<DeleteTransactionEndpoint>()
+                       .MapEndpoint<GetByIdTransactionEndpoint>()
+                       .MapEndpoint<GetTransactionsByPeriodEndpoint>();
         }
 
         private static IEndpointRouteBuilder MapEndpoint<TEndpoint>(this IEndpointRouteBuilder endpoint) where TEndpoint : IEndpoint

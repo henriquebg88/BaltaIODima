@@ -1,25 +1,25 @@
 using Dima.API.Commom.API;
 using Dima.Core.Handlers;
 using Dima.Core.Models;
-using Dima.Core.Requests.Categories;
+using Dima.Core.Requests.Transactions;
 using Dima.Core.Responses;
 
 namespace Dima.API.Endpoints.Categories
 {
-    public class DeleteCategoryEndpoint : IEndpoint
+    public class DeleteTransactionEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app) 
             => app.MapDelete("{id}", HandleAsyhnc)
-                    .WithName("Categories: Delete")
-                    .WithSummary("Exclui uma Categoria existente.")
+                    .WithName("Transactions: Delete")
+                    .WithSummary("Exclui uma Transação existente.")
                     .WithOrder(3)
-                    .Produces<Response<Category?>>();
+                    .Produces<Response<Transaction?>>();
         
-        private static async Task<IResult> HandleAsyhnc(ICaterogyHandler handler, long id)
+        private static async Task<IResult> HandleAsyhnc(ITransactionHandler handler, long id)
         {
-            var request = new DeleteCategoryRequest
+            var request = new DeleteTransactionRequest
             {
-                id = id,
+                Id = id,
                 UserId = "henrique"
             };
 

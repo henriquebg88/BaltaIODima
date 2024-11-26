@@ -48,6 +48,7 @@ builder.Services.AddSwaggerGen( SW => {
 //Registrar um tipo de serviço (no caso, o handler) no container de dependências (para injeção de dependência), 
 //com tempo de vida transitório (Ou seja, toda vez que o ASP.NET Core precisar de uma instância do tipo Handler, ele criará uma nova instância dessa classe.)
 builder.Services.AddTransient<ICaterogyHandler, CategoryHandler>(); // O Aspnet consegue inferir que o Request vem do Body, mas não sabe de onde vem o Handler
+builder.Services.AddTransient<ITransactionHandler, TransactionHandler>(); // O Aspnet consegue inferir que o Request vem do Body, mas não sabe de onde vem o Handler
 
 var app = builder.Build();
 app.UseSwagger();
