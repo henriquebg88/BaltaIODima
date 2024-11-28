@@ -63,6 +63,16 @@ API -> Banco (Code First)
   </li>
 </ol>
 
+<h2>ASP.NET identity</h2>
+<p>Agora pode ser usado na API, para autenticação via Cookies criados no server, podendo decidir qual Frontend pode acessar a API. Identity API.</p>
+
+Para instalar o pacote, no projeto da API:
+<code>dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 8.0.6</code> (versão 8 para ser compatível com a versão do .NET usada no projeto)
+<ol>
+  <li>Instalar o pacote, no projeto da API</li>
+  <li>Trocar a herança do contexto do banco de DbContext para IdentityDbContext</li>
+</ol>
+
 <hr>
 
 <h4>Anotações</h4>
