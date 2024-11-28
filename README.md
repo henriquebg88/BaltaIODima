@@ -71,6 +71,12 @@ Para instalar o pacote, no projeto da API:
 <ol>
   <li>Instalar o pacote, no projeto da API</li>
   <li>Trocar a herança do contexto do banco de DbContext para IdentityDbContext</li>
+  <ol>
+    A partir daqui, ja funcionará. Os passos seguintes são customizações para alterar o padrão
+    <li>Criar a Model para usuário, na API</li>
+    <li>Indicar a customização no AppDbContext</li>
+    <li>Fazer o mapeamento</li>
+  </ol>
 </ol>
 
 <hr>
