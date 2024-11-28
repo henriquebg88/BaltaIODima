@@ -5,12 +5,26 @@
 */
 using System.Reflection;
 using Dima.API.Data.Mappings;
+using Dima.API.Models;
 using Dima.Core.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dima.API.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext 
+    : IdentityDbContext //Antes de usar o identity era DbContext
+    <
+        User, 
+        IdentityRole<long>, 
+        long,
+        IdentityUserClaim<long>,
+        IdentityUserRole<long>,
+        IdentityUserLogin<long>,
+        IdentityRoleClaim<long>,
+        IdentityUserToken<long>
+    > //Para customizar o usuário. Role tem que ser passado junto mesmo que não seja alterado.
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) :base(options)
         {

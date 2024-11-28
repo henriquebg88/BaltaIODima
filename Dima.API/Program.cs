@@ -2,19 +2,15 @@
 using Dima.API.Data;
 using Dima.API.Endpoints;
 using Dima.API.Handlers;
+using Dima.API.Models;
 using Dima.Core.Handlers;
 using Dima.Core.Models;
 using Dima.Core.Requests.Categories;
 using Dima.Core.Responses;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var connectionString = builder.Configuration.GetConnectionString("Default") ?? "";
-
-builder.Services.AddDbContext<AppDbContext>( x => {
-    x.UseSqlServer(connectionString);
-});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen( SW => {
@@ -22,6 +18,22 @@ builder.Services.AddSwaggerGen( SW => {
     SW.CustomSchemaIds( n => n.FullName );
 });
 
+//Deve estar depois do Swagger. Autenticação antes.
+builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)  //Identifica o usuario - Formas de autenticação: JWT, Bearer e o utilizado neste curso
+                .AddIdentityCookies(); //Serão criados, pelo servidor, cookies para trafegar no cabeçalho da requisição
+builder.Services.AddAuthorization();  //Limita o usuario
+
+var connectionString = builder.Configuration.GetConnectionString("Default") ?? "";
+
+builder.Services.AddDbContext<AppDbContext>( x => {
+    x.UseSqlServer(connectionString);
+});
+
+builder.Services.AddIdentityCore<User>() //Core -> sem criar páginas
+                .AddRoles<IdentityRole<long>>()
+                .AddEntityFrameworkStores<AppDbContext>() //Usar o EF para fazer o armazenamento
+                .AddApiEndpoints(); 
+                
 #region Explicação AddTransient/Singleton/Scoped
     /**
     AddTransient<Handler>():
