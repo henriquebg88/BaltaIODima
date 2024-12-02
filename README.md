@@ -77,6 +77,7 @@ Para instalar o pacote, no projeto da API:
     <li>Indicar a customização no AppDbContext</li>
     <li>Fazer o mapeamento para as migrations</li>
     <li>Adicionar no Program.cs o builder.Services.AddIdentityCore<User>()</li>
+    <li>Fazer a Migration</li>
   </ul>
 </ol>
 
