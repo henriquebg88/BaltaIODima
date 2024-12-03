@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Dima.API.Commom.API;
 using Dima.Core.Handlers;
 using Dima.Core.Models;
@@ -15,12 +16,12 @@ namespace Dima.API.Endpoints.Categories
                     .WithOrder(3)
                     .Produces<Response<Transaction?>>();
         
-        private static async Task<IResult> HandleAsyhnc(ITransactionHandler handler, long id)
+        private static async Task<IResult> HandleAsyhnc(ClaimsPrincipal user, ITransactionHandler handler, long id)
         {
             var request = new DeleteTransactionRequest
             {
                 Id = id,
-                UserId = "henrique"
+                UserId = user.Identity?.Name ?? ""
             };
 
             var result = await handler.DeleteteAsync(request);

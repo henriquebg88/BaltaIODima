@@ -13,10 +13,14 @@ namespace Dima.API.Endpoints
         public static void MapEndpoints(this WebApplication app)
         {
             var endpointsV1 = app.MapGroup(V1);
+            
+            app.MapGroup("")
+                .WithTags("Health check")
+                .MapGet("/", () => new {message = "Estou vivo."});
 
             endpointsV1.MapGroup(CATEGORIES)
                        .WithTags(CATEGORIES)
-                       //.RequireAuthorization()
+                       .RequireAuthorization()
                        .MapEndpoint<CreateCategoryEndpoint>()
                        .MapEndpoint<UpdateCategoryEndpoint>()
                        .MapEndpoint<DeleteCategoryEndpoint>()
@@ -25,7 +29,7 @@ namespace Dima.API.Endpoints
 
             endpointsV1.MapGroup(TRANSACTIONS)
                        .WithTags(TRANSACTIONS)
-                       //.RequireAuthorization()
+                       .RequireAuthorization()
                        .MapEndpoint<CreateTransactionEndpoint>()
                        .MapEndpoint<UpdateTransactionEndpoint>()
                        .MapEndpoint<DeleteTransactionEndpoint>()

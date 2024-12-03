@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Dima.API.Commom.API;
 using Dima.Core.Handlers;
 using Dima.Core.Models;
@@ -15,12 +16,12 @@ namespace Dima.API.Endpoints.Categories
                     .WithOrder(4)
                     .Produces<Response<Category?>>();
         
-        private static async Task<IResult> HandleAsyhnc(ICaterogyHandler handler, long id)
+        private static async Task<IResult> HandleAsyhnc(ClaimsPrincipal user, ICaterogyHandler handler, long id)
         {
             var request = new GetCategoryByIdRequest
             {
                 id = id,
-                UserId = "henrique"
+                UserId = user.Identity?.Name ?? ""
             };
 
             var result = await handler.GetByIdAsync(request);

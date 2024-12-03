@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Dima.API.Commom.API;
 using Dima.Core.Handlers;
 using Dima.Core.Models;
@@ -16,9 +17,9 @@ namespace Dima.API.Endpoints.Categories
                     .WithOrder(2)
                     .Produces<Response<Transaction?>>();
         
-        private static async Task<IResult> HandleAsyhnc(ITransactionHandler handler, UpdateTransactionRequest request, long id)
+        private static async Task<IResult> HandleAsyhnc(ClaimsPrincipal user, ITransactionHandler handler, UpdateTransactionRequest request, long id)
         {
-            request.UserId = "henrique";
+            request.UserId = user.Identity?.Name ?? "";
             request.Id = id;
 
             var result = await handler.UpdateAsync(request);

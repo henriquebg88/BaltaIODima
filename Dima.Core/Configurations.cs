@@ -5,5 +5,7 @@ namespace Dima.Core
         public const int DefaultPageSize = 25;
         public const int DefaultPageNumber = 1;
         public const int DefaultStatusCode = 200;
+
+        public static string connectionString { get; set; } = "";
     }
 }
