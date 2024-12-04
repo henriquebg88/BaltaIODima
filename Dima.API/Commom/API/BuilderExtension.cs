@@ -86,7 +86,7 @@ namespace Dima.API.Commom.API
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials()
-                )
+                );
             });
         }
     }

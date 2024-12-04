@@ -7,5 +7,7 @@ namespace Dima.Core
         public const int DefaultStatusCode = 200;
 
         public static string connectionString { get; set; } = "";
+        public static string FrontendURL { get; set; } = "";
+        public static string BackendURL { get; set; } = "";
     }
 }
