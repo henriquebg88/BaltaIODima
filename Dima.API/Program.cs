@@ -1,5 +1,6 @@
 //Minimal API
 using System.Security.Claims;
+using Dima.API;
 using Dima.API.Commom.API;
 using Dima.API.Endpoints;
 using Dima.API.Models;
@@ -19,6 +20,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment()){
     app.ConfigureDevEnviroment();
 }
+
+app.UseCors(APIConfiguration.CorsPolicyName);
 
 app.UseSecurity();
 
@@ -64,8 +67,6 @@ app.UseSecurity();
 //                                                              .Produces<Response>(); (classe Response, ou qualquer outra)
 // estes métodos no final são para melhorar a documentação da API no Swagger
 #endregion
-
-app.MapGet("/", () => new {message = "Estou vivo."});
 
 //Método de extensão criado para colocar os mapeamentos
 app.MapEndpoints();

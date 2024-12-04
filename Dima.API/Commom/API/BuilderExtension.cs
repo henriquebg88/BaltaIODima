@@ -10,8 +10,11 @@ namespace Dima.API.Commom.API
 {
     public static class BuilderExtension
     {
-        public static void AddDimaConfiguration(this WebApplicationBuilder builder) =>
+        public static void AddDimaConfiguration(this WebApplicationBuilder builder){
             Configurations.connectionString = builder.Configuration.GetConnectionString("Default") ?? "";
+            Configurations.FrontendURL = builder.Configuration.GetConnectionString("FrontendURL") ?? "";
+            Configurations.BackendURL = builder.Configuration.GetConnectionString("BackendURL") ?? "";
+        }
 
 
         public static void AddSwaggerDocumentation(this WebApplicationBuilder builder){
@@ -72,7 +75,19 @@ namespace Dima.API.Commom.API
         }
 
         public static void AddDimaCors(this WebApplicationBuilder builder){
-
+            builder.Services.AddCors(options => {
+                options.AddPolicy(
+                    APIConfiguration.CorsPolicyName,
+                    policy => policy
+                        .WithOrigins([
+                            Configurations.BackendURL,
+                            Configurations.FrontendURL
+                        ])
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                )
+            });
         }
     }
 }
