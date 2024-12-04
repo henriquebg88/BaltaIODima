@@ -81,6 +81,14 @@ Para instalar o pacote, no projeto da API:
   </ul>
 </ol>
 
+<h2>Frontend - Blazor Web Assembly</h2>
+<p>Projeto que rodará inteiramente no cliente.</p>
+
+<ul>
+  <li><code>dotnet new blazorwasm -o Dima.Web --pwa</code> para iniciar o projeto</li>
+  <li><code>dotnet sln add ./Dima.Web</code> para adicionar o projeto à solução</li>
+</ul>
+
 <hr>
 
 <h4>Anotações</h4>
