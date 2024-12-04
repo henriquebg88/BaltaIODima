@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\henri\\Documents\\Dima\\dima.api\\Dima.API.csproj": {}
+    "C:\\Users\\henri\\Documents\\Dima\\Dima.API\\Dima.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\henri\\Documents\\Dima\\dima.api\\Dima.API.csproj": {
+    "C:\\Users\\henri\\Documents\\Dima\\Dima.API\\Dima.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\henri\\Documents\\Dima\\dima.api\\Dima.API.csproj",
+        "projectUniqueName": "C:\\Users\\henri\\Documents\\Dima\\Dima.API\\Dima.API.csproj",
         "projectName": "Dima.API",
-        "projectPath": "C:\\Users\\henri\\Documents\\Dima\\dima.api\\Dima.API.csproj",
+        "projectPath": "C:\\Users\\henri\\Documents\\Dima\\Dima.API\\Dima.API.csproj",
         "packagesPath": "C:\\Users\\henri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\henri\\Documents\\Dima\\dima.api\\obj\\",
+        "outputPath": "C:\\Users\\henri\\Documents\\Dima\\Dima.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\henri\\AppData\\Roaming\\NuGet\\NuGet.Config"
