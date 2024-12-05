@@ -1,0 +1,49 @@
+@page "/login"
+@layout HeadlessLayout
+
+<PageTitle>Dima - Login</PageTitle>
+
+<h1>Login</h1>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem sm="12" md="8" lg="6">
+        <MudPaper Class="mud-width-full px-8 py-6">
+            <div class="d-flex justify-center py-6">
+                <img 
+                    src="imgs/dima.png"
+                    width="150" />
+
+            </div>
+            
+            <MudForm @ref="_mudForm">
+                <MudTextField 
+                    Label="E-mail"
+                    T="string"
+                    InputType="InputType.Email"
+                    Required="true"
+                    RequiredError="Informe o E-mail"
+                    Validation="@( new EmailAddressAttribute{ErrorMessage = "E-mail inválido"} )"
+                />
+                <MudTextField 
+                    Label="Senha"
+                    T="string"
+                    InputType="InputType.Password"
+                    Required="true"
+                    RequiredError="=Informe a senha"
+                    
+                />
+            </MudForm>
+
+            <div class="d-flex mt-8" style="justify-content: space-between;">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary">Entrar</MudButton>
+                <MudButton Href="/registrar">Registrar</MudButton>
+            </div>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    
+    MudForm? _mudForm ;
+}    
+
