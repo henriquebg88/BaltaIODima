@@ -18,5 +18,24 @@
 </MudLayout>
 
 @code{
-    bool isDarkMode = true;
+    private bool isDarkMode = true;
+    private MudThemeProvider mudThemeProvider = null!;
+
+    // Depois que todos os elementos foram renderizados na tela
+    protected override async Task OnAfterRenderAsync(bool firstRender){
+        if(firstRender){
+            isDarkMode = await mudThemeProvider.GetSystemPreference();
+
+            await mudThemeProvider.WatchSystemPreference(OnSystemThemeChange);
+
+            StateHasChanged();
+        }
+
+    }
+
+    private Task OnSystemThemeChange(bool newValue){
+        isDarkMode = newValue;
+        StateHasChanged(); // Para alguns tipos de ocasiões, o Blazor não irá atualizar a tela automáticamente
+        return Task.CompletedTask;
+    }
 }
