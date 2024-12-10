@@ -88,6 +88,7 @@ Para instalar o pacote, no projeto da API:
   <li><code>dotnet new blazorwasm -o Dima.Web --pwa</code> para iniciar o projeto</li>
   <li><code>dotnet sln add ./Dima.Web</code> para adicionar o projeto à solução</li>
   <li>Adicionar o MudBlazor - Biblioteca de componentes para Blazor. https://www.mudblazor.com/getting-started/installation#online-playground </li>
+  <li><code>dotnet add package Microsoft.Extensions.Http</code> para instalar o pacote que possui mais métodos para o HttpClient</li>
 </ul>
 
 <hr>
