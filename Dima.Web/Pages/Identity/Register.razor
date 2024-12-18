@@ -1,5 +1,6 @@
 @page "/registrar"
 @layout HeadlessLayout
+@inherits RegisterPage
 
 <PageTitle>Dima - Registrar</PageTitle>
 
@@ -15,7 +16,10 @@
 
             </div>
             
-            <MudForm @ref="_mudForm">
+            <EditForm Model="@RegisterRequest" OnValidSubmit="OnValidSubmitAsync">
+                <DataAnnotationsValidator />
+                
+
                 <MudTextField 
                     Label="E-mail"
                     T="string"
@@ -23,6 +27,8 @@
                     Required="true"
                     RequiredError="Informe o E-mail"
                     Validation="@( new EmailAddressAttribute{ErrorMessage = "E-mail inválido"} )"
+                    @bind-Value="RegisterRequest.Email"
+                    For="@(() => RegisterRequest.Email)"
                 />
                 <MudTextField 
                     Label="Senha"
@@ -30,20 +36,26 @@
                     InputType="InputType.Password"
                     Required="true"
                     RequiredError="=Informe a senha"
+                    @bind-Value="RegisterRequest.Password"
+                    For="@(() => RegisterRequest.Password)"
                     
                 />
-            </MudForm>
 
-            <div class="d-flex mt-8" style="justify-content: space-between;">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary">Confirmar registro</MudButton>
-                <MudButton Href="/login">Já tenho uma conta</MudButton>
-            </div>
+                <div class="d-flex mt-8" style="justify-content: space-between;">
+                    @if(isBusy){
+                        <MudProgressCircular Color="Color.Info" Indeterminate="true" />
+                    }else{
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">Confirmar registro</MudButton>
+                        <MudButton Href="/login">Já tenho uma conta</MudButton>
+                    }
+                </div>
+            </EditForm>
+
         </MudPaper>
     </MudItem>
 </MudGrid>
 
 @code {
     
-    MudForm? _mudForm ;
 }    
 

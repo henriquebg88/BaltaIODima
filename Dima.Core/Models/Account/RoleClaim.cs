@@ -1,6 +1,6 @@
 namespace Dima.Core.Models.Account
 {
-    public class DimaClaim{
+    public class RoleClaim{
         public string? Issuer { get; set; }
         public string? OriginalIssuer { get; set; }
         public string? Type { get; set; }
